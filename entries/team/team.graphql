@@ -1,0 +1,50 @@
+query GET_TEAM($limit: Int, $localizationId: [QueryArgument!]!) {
+  entries(section: "team", limit: $limit, siteId: $localizationId) {
+    slug
+    __typename
+    ...PersonParts
+  }
+}
+
+query GET_TEAM_MEMBER_BY_SLUG(
+  $slug: [String]
+  $localizationId: [QueryArgument!]!
+) {
+  entry(section: "team", slug: $slug, siteId: $localizationId) {
+    ... on team_default_Entry {
+      __typename
+      ...PersonParts
+    }
+  }
+}
+
+fragment PersonParts on team_default_Entry {
+  employeeFirstName
+  employeeSurname
+  employeeImage {
+    url
+  }
+  employeeFunction
+  employeeEmail
+  employeeLocations
+  contactCategories {
+    title
+  }
+  employeeLinkedin
+  employeeXing
+  employeeBackground
+  employeeWorkExperiences {
+    ... on employeeWorkExperiences_employeeWorkExperience_BlockType {
+      year
+      experienceTitle
+      description
+    }
+  }
+  employeeEducations {
+    ... on employeeEducations_employeeEducation_BlockType {
+      year
+      educationTitle
+      description
+    }
+  }
+}

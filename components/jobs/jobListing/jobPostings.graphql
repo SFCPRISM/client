@@ -1,0 +1,41 @@
+query GET_JOB_POSTINGS($relatedToTags: [TagCriteriaInput!]) {
+  entries(section: "jobs", relatedToTags: $relatedToTags) {
+    ... on jobs_default_Entry {
+      __typename
+      title
+      jobId
+      jobPostingArea {
+        title
+      }
+      jobPostingLocation {
+        title
+      }
+      jobPostingWorkload
+      jobPostingEmployment {
+        title
+      }
+    }
+  }
+}
+
+query GET_API_JOB_POSTINGS {
+  entries(section: "jobs") {
+    ... on jobs_default_Entry {
+      __typename
+      title
+      jobPostingDescription
+      jobId
+      jobPostingArea {
+        title
+      }
+      jobPostingLocation {
+        title
+      }
+      jobPostingWorkload
+      jobPostingEmployment {
+        title
+      }
+      dateUpdated @formatDateTime(format: "d.m.Y")
+    }
+  }
+}

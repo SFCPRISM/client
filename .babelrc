@@ -1,0 +1,10 @@
+{
+  "presets": ["next/babel"],
+  "plugins": [
+    ["css-variable/babel", { "displayName": false }],
+    [
+      "styled-components",
+      { "ssr": true, "displayName": false, "preprocess": false }
+    ]
+  ]
+}

@@ -1,0 +1,13 @@
+query GET_PARTNER($localizationId: [QueryArgument!]!) {
+  entries(section: "partner", siteId: $localizationId) {
+    ... on partner_default_Entry {
+      __typename
+      title
+      description
+      image {
+        url
+      }
+      webUrl
+    }
+  }
+}

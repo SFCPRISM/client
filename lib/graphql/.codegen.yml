@@ -1,0 +1,64 @@
+schema:
+  - https://cms.stellenwerk.ch/api
+documents: "**/*.graphql"
+generates:
+  lib/graphql/types/generated.ts:
+    plugins:
+      - add:
+          content: // Generated File. Do not change it manually!
+      - add:
+          content: "import { QueryArgument } from './queryArgument'"
+      - add:
+          content:
+            - /* eslint-disable */
+      - typescript
+    config:
+      immutableTypes: true
+      arrayInputCoercion: false
+      skipTypename: true
+      namingConvention:
+        typeNames: change-case#pascalCase
+        enumValues: keep
+      scalars:
+        Void: "void"
+        Date: "string"
+        QueryArgument: QueryArgument
+  /:
+    preset: near-operation-file
+    presetConfig:
+      extension: .generated.tsx
+      baseTypesPath: "~lib/graphql/types/generated"
+    plugins:
+      - add:
+          content: // Generated File. Do not change it manually!
+      - add:
+          content:
+            - /* eslint-disable */
+            - /* eslint-enable unused-imports/no-unused-imports */
+      - typescript-operations
+      - typescript-react-query
+    config:
+      maybeValue: "T | null"
+      immutableTypes: true
+      preResolveTypes: true
+      arrayInputCoercion: false
+      withHooks: true
+      withComponent: false
+      withHOC: false
+      # skipTypename: true
+      scalars:
+        Void: "void"
+        Date: "string"
+      namingConvention:
+        transformUnderscore: true
+      documentMode: external
+      importDocumentNodeExternallyFrom: near-operation-file
+      exposeFetcher: true
+      exposeQueryKeys: true
+      fetcher:
+        endpoint: "https://cms.stellenwerk.ch/api"
+        fetchParams:
+          headers:
+            "Content-Type": "application/json"
+            "Accept": "application/json"
+            # Authorization: process.env.GRAPHQL_AUTHORIZATION_TOKEN

@@ -1,0 +1,25 @@
+query GET_JOB_POSTING($jobPostingId: [QueryArgument!]!) {
+  entry(section: "jobs", jobId: $jobPostingId) {
+    ... on jobs_default_Entry {
+      __typename
+      title
+      jobId
+      jobPostingDescription
+      jobPostingWorkload
+      jobPostingArea {
+        title
+      }
+      jobPostingLocation {
+        title
+      }
+      jobPostingEmployment {
+        title
+      }
+      jobPostingLogo {
+        title
+        url
+      }
+      postDate @formatDateTime(format: "d.m.Y")
+    }
+  }
+}

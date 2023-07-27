@@ -1,0 +1,88 @@
+query GET_BLOG_ENTRIES($limit: Int, $localizationId: [QueryArgument!]!) {
+  entries(section: "blog", limit: $limit, siteId: $localizationId) {
+    ...BlogTeaser
+  }
+}
+
+fragment BlogTeaser on blog_default_Entry {
+  __typename
+  title
+  slug
+  id
+  postDate @formatDateTime(format: "d.m.Y")
+  blogTeaserDescription
+  blogTeaserImage {
+    url
+    filename
+    height
+    width
+  }
+  blogCategories {
+    title
+    id
+  }
+}
+
+query GET_BLOG_ENTRY_BY_SLUG(
+  $slug: [String]
+  $localizationId: [QueryArgument!]!
+) {
+  entry(section: "blog", slug: $slug, siteId: $localizationId) {
+    ... on blog_default_Entry {
+      __typename
+      title
+      id
+      postDate @formatDateTime(format: "d.m.Y")
+      blogTeaserDescription
+      blogTeaserImage {
+        url
+        filename
+        height
+        width
+      }
+      blogCategories {
+        title
+        id
+      }
+      blogContent {
+        ... on blogContent_text_BlockType {
+          __typename
+          sectionTitle
+          text
+        }
+        ... on blogContent_asset_BlockType {
+          __typename
+          image {
+            url
+            filename
+            height
+            width
+          }
+          caption
+          size
+        }
+        ... on blogContent_file_BlockType {
+          __typename
+          file {
+            url
+            filename
+          }
+          description
+        }
+        ... on blogContent_link_BlockType {
+          __typename
+          linkText
+          linkUrl
+          description
+        }
+      }
+    }
+  }
+}
+
+query GET_BLOG_CATEGORIES($localizationId: [QueryArgument!]!) {
+  categories(group: "blogCategories", siteId: $localizationId) {
+    id
+    title
+  }
+}

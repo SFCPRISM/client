@@ -1,0 +1,19 @@
+query FOOTER($localizationId: [QueryArgument!]!) {
+  globalSet(handle: "footer", siteId: $localizationId) {
+    ... on footer_GlobalSet {
+      __typename
+      locations {
+        ... on locations_location_BlockType {
+          __typename
+          city
+          firm
+          zipCode
+          street
+          floor
+          phone
+          email
+        }
+      }
+    }
+  }
+}

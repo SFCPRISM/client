@@ -1,0 +1,8 @@
+query GET_CRITICAL_INFO($localizationId: [QueryArgument!]!) {
+  entry(section: "home", siteId: $localizationId) {
+    ... on home_home_Entry {
+      __typename
+      criticalInfo
+    }
+  }
+}

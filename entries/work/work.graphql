@@ -1,0 +1,48 @@
+query GET_WORK($localizationId: [QueryArgument!]!) {
+  entry(section: "work", siteId: $localizationId) {
+    ... on work_work_Entry {
+      __typename
+      simpleRedactor
+      benefits {
+        __typename
+        ... on benefits_benefit_BlockType {
+          benefitTitle
+          items {
+            benefit
+          }
+          icons {
+            url
+            title
+          }
+        }
+      }
+      topJobs {
+        ... on jobs_default_Entry {
+          title
+          jobId
+          slug
+          jobPostingWorkload
+          jobPostingLocation {
+            title
+          }
+        }
+      }
+      contactPersons {
+        ... on team_default_Entry {
+          __typename
+          employeeFirstName
+          employeeSurname
+          employeeImage {
+            url
+          }
+          employeeFunction
+          employeeEmail
+          employeeLocations
+          contactCategories {
+            title
+          }
+        }
+      }
+    }
+  }
+}

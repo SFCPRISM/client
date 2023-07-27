@@ -1,0 +1,15 @@
+query GET_JOB_POSTING_TAGS($localizationId: [QueryArgument!]!) {
+  employments: tags(
+    group: "jobPostingEmploymentTags"
+    siteId: $localizationId
+  ) {
+    title
+  }
+  locations: tags(group: "jobPostingLocationTags", siteId: $localizationId) {
+    title
+    groupHandle
+  }
+  areas: tags(group: "jobPostingAreaTags", siteId: $localizationId) {
+    title
+  }
+}

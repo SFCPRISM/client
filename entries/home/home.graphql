@@ -1,0 +1,24 @@
+query GET_TOP_JOBS {
+  entry(section: "home") {
+    ... on home_home_Entry {
+      __typename
+      topJobs {
+        __typename
+        ... on jobs_default_Entry {
+          __typename
+          title
+          jobId
+          jobPostingWorkload
+        }
+      }
+    }
+  }
+  entries(section: "jobs", limit: 3) {
+    ... on jobs_default_Entry {
+      __typename
+      title
+      jobId
+      jobPostingWorkload
+    }
+  }
+}

@@ -1,0 +1,12 @@
+query GET_SLOGAN($localizationId: [QueryArgument!]!) {
+  entry(section: "home", siteId: $localizationId) {
+    ... on home_home_Entry {
+      __typename
+      slogan
+      heroImage {
+        title
+        url
+      }
+    }
+  }
+}

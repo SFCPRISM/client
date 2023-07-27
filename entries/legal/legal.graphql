@@ -1,0 +1,47 @@
+query GET_DATA_PROTECTION_GUIDELINES($localizationId: [QueryArgument!]!) {
+  entry(section: "dataProtectionGuidelines", siteId: $localizationId) {
+    title
+    ... on dataProtectionGuidelines_dataProtectionGuidelines_Entry {
+      __typename
+      textsWithTitle {
+        ... on textsWithTitle_textWithTitle_BlockType {
+          __typename
+          blockTitle
+          blockContent
+        }
+      }
+    }
+  }
+}
+
+query GET_LEGAL_DESCLOSURE($localizationId: [QueryArgument!]!) {
+  entry(section: "legalDesclosure", siteId: $localizationId) {
+    title
+    ... on legalDesclosure_legalDesclosure_Entry {
+      __typename
+      textsWithTitle {
+        ... on textsWithTitle_textWithTitle_BlockType {
+          __typename
+          blockTitle
+          blockContent
+        }
+      }
+    }
+  }
+}
+
+query GET_TERMS_OF_USE($localizationId: [QueryArgument!]!) {
+  entry(section: "termsOfUse", siteId: $localizationId) {
+    title
+    ... on termsOfUse_termsOfUse_Entry {
+      __typename
+      textsWithTitle {
+        ... on textsWithTitle_textWithTitle_BlockType {
+          __typename
+          blockTitle
+          blockContent
+        }
+      }
+    }
+  }
+}

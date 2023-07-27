@@ -1,0 +1,31 @@
+query GET_REFERENCES($localizationId: [QueryArgument!]!) {
+  entries(section: "references", siteId: $localizationId) {
+    id
+    ... on references_person_Entry {
+      __typename
+      title
+      description
+      image {
+        url
+      }
+      isEnabledForCarousel
+    }
+    ... on references_company_Entry {
+      __typename
+      title
+      description
+      image {
+        url
+      }
+      webUrl
+      isEnabledForCarousel
+    }
+  }
+}
+
+query GET_REFERENCES_CATEGORIES($localizationId: [QueryArgument!]!) {
+  categories(group: "blogCategories", siteId: $localizationId) {
+    id
+    title
+  }
+}
